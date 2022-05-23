@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float walkingSpeed = 7.5f;
+    public float walkingSpeed = 7.5f; //all the variables needed for player control
     private float runningSpeed;
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
@@ -14,17 +14,17 @@ public class Player : MonoBehaviour
     public float lookSpeed = 2.0f;
     public float lookXLimit = 45.0f;
 
-    CharacterController characterController;
+    CharacterController characterController; //Unity's built in character controller
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
-    private GameObject interactingWith;
+    private GameObject interactingWith; //the game object (npc) the player is currently interacting with
 
     [HideInInspector]
     public bool canMove = true;
 
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
+        characterController = GetComponent<CharacterController>();//get the character controller and set the running speed to be double the walking one
         runningSpeed = 2 * walkingSpeed;
 
         // Lock cursor
@@ -39,12 +39,13 @@ public class Player : MonoBehaviour
         Vector3 right = transform.TransformDirection(Vector3.right);
         // Press Left Shift to run
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
+        //calculate the input on each axis, except y which will be done when jumping
         float curSpeedX = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Vertical") : 0;
         float curSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Horizontal") : 0;
         float movementDirectionY = moveDirection.y;
-        moveDirection = (forward * curSpeedX) + (right * curSpeedY);
+        moveDirection = (forward * curSpeedX) + (right * curSpeedY); // calculate the movement vector based on those values
 
-        if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
+        if (Input.GetButton("Jump") && canMove && characterController.isGrounded) //jumping mechanic that simply adds an input value on the y axis
         {
             moveDirection.y = jumpSpeed;
         }
@@ -74,12 +75,12 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void SetInteraction(GameObject interactedNPC)
+    public void SetInteraction(GameObject interactedNPC) //control the interaction with the NPC
     {
         interactingWith = interactedNPC;
     }
 
-    public GameObject GetInteraction()
+    public GameObject GetInteraction() //get the NPC the player is interacting with
     {
         return interactingWith;
     }
