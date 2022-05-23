@@ -1,0 +1,27 @@
+
+INSTRUCTIONS
+
+
+The playable built game is located in the "Game Build" folder.
+
+The project files are located in the Project folder.
+
+The game has all of the controls in the main menu, under controls; The goal of the game is explained, also there is no laoding screen so if after pressing a button or
+going through a gate the game freezes it's most likely just loading, not crashing, please do not tap anything.
+
+CONTROLS - just in case:
+
+W,A,S,D - move the player and the plane
+Left click: Shoot with the plane
+E - interact, as prompted
+Space: Jump
+Space and ctrl in the plane: ascend or descend
+Mouse movement controls both the player camera and the plane direction
+
+BUILD INSTRUCTIONS
+
+The project might be lacking lighting due to storage optimizations, so when the project is open, go to the lighting settings and click generate (if auto-generate is not 
+already enabled). 
+
+Afterwards go to File -> Build Settings; Add all of the scenes from the "Scenes" folder in the build section (the order does not matter), select the target platform and
+press build. 
