@@ -12,20 +12,14 @@ public class ResetText : MonoBehaviour
         text = GetComponent<Text>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void ResetWriting()
+    public void ResetWriting() //method that calls the reset function
     {
         StartCoroutine(showTime());
     }
 
     IEnumerator showTime()
     {
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(4); // after showing the text for 4 seconds, resets the text back to empty, therefore hiding it
         text.text = "";
     }
 }
