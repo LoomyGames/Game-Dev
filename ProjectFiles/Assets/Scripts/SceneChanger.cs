@@ -6,13 +6,9 @@ using UnityEngine.SceneManagement;
 public class SceneChanger : MonoBehaviour
 {
 
-    public string sceneName = "";
+    public string sceneName = "";// the name of the scene this trigger will mvoe the player to (level 1, 2, 3 etc.)
 
-    private void Start()
-    {
-    }
-
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other) //upon entering the trigger, the player is sent to the new scene, if the name is not null (for safety purposes)
     {
         if(other.tag == "Player")
         {
