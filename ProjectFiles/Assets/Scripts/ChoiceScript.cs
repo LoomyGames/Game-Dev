@@ -8,14 +8,14 @@ public class ChoiceScript : MonoBehaviour
 
     private Button button;
     Player player;
-    GameObject NPC;
+    GameObject NPC;//reference to the NPC the player is interacting with
     private Text thisText;
     private Text dialogueText;
 
     // Start is called before the first frame update
     void Start()
     {
-        button = GetComponent<Button>();
+        button = GetComponent<Button>(); //initialize all of the variables
         button.onClick.AddListener(SendSignal);
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
         thisText = GetComponent<Text>();
@@ -23,16 +23,10 @@ public class ChoiceScript : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void SendSignal()
     {
-        NPC = player.GetInteraction();
-        if(NPC!= null)
+        NPC = player.GetInteraction();//whenever we need to send a signal we need to get the proper NPC we are talking to
+        if(NPC!= null)//this is just for debugging
         {
             Debug.Log("Interacting with" + NPC.name);
         }else
@@ -40,16 +34,16 @@ public class ChoiceScript : MonoBehaviour
             Debug.Log("No Player");
         }
 
-        switch (thisText.text)
+        switch (thisText.text)//if we press one of those buttons:
         {
-            case "Talk":
+            case "Talk": // if we talk, select a random line the NPC has and display it on the screen
                 int dialogueSelect = Random.Range(1, NPC.GetComponent<NPCInteract>().Dialogues.Length);
                 dialogueText.text = NPC.GetComponent<NPCInteract>().Dialogues[dialogueSelect];
                 break;
-            case "Leave":
+            case "Leave"://if we leave then call the Hide Menu method that hides the meny and re-enables the player
                 NPC.GetComponent<NPCInteract>().HideMenu();
                 break;
-            default:
+            default://otherwise output an error for debugging
                 Debug.Log("Option not found");
                 break;
         }
