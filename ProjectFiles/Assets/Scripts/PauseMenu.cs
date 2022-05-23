@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public GameObject menuObj;
+    public GameObject menuObj; //menu objects and controllers required for pause
     bool isPaused = false;
     public Player player;
     public GameObject plane;
@@ -16,7 +16,7 @@ public class PauseMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        menuObj.SetActive(false);
+        menuObj.SetActive(false); //find all of the controllers
         planeC = plane.GetComponent<PlaneController>();
         planeS = plane.GetComponent<PlaneShooting>();
         planeE = plane.GetComponent<EnterPlane>();
@@ -25,11 +25,11 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape)) //when pressing Escape
         {
-            if (!isPaused)
+            if (!isPaused) //if the game is not paused yet
             {
-                if (planeE.inPlane)
+                if (planeE.inPlane) //if the player is in the plane, disable the plane controls and freeze the time
                 {
                     Time.timeScale = 0;
                     Cursor.lockState = CursorLockMode.None;
@@ -39,7 +39,7 @@ public class PauseMenu : MonoBehaviour
                     planeC.enabled = false;
                     planeS.enabled = false;
                 }
-                else
+                else //otherwise freeze the time and disable the player controller
                 {
                     Time.timeScale = 0;
                     Cursor.lockState = CursorLockMode.None;
@@ -49,9 +49,9 @@ public class PauseMenu : MonoBehaviour
                     player.enabled = false;
                 }
                 
-            } else
+            } else //if already paused
             {
-                if (planeE.inPlane)
+                if (planeE.inPlane) // if the player is in the plane, re-enable the plane controllers and time 
                 {
                     Time.timeScale = 1;
                     Cursor.lockState = CursorLockMode.Confined;
@@ -61,7 +61,7 @@ public class PauseMenu : MonoBehaviour
                     planeC.enabled = true;
                     planeS.enabled = true;
                 }
-                else
+                else //otherwise re-enable the player controller and time
                 {
                     Time.timeScale = 1;
                     Cursor.lockState = CursorLockMode.Locked;
@@ -74,7 +74,7 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    public void PressResume()
+    public void PressResume() // if pressing the resume button also re-enables the controllers and time accordingly
     {
         if (planeE.inPlane)
         {
@@ -97,7 +97,7 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    public void PressMenu()
+    public void PressMenu() //if pressing the menu button, the game will stop and load the main menu scene (losing all progress)
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("MenuScene");
