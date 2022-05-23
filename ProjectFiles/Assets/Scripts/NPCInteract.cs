@@ -107,7 +107,7 @@ public class NPCInteract : MonoBehaviour
         Cursor.visible = true;
     }
 
-    public void HideMenu() // hide the UI elements adn destroy the options (because the UI is reused by the other NPCs) 
+    public void HideMenu() // hide the UI elements and destroy the options (because the UI is reused by the other NPCs) 
     {
         DialogueBox.enabled = false;
         Crosshair.enabled = true;
