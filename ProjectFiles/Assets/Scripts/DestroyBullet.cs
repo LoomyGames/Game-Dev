@@ -4,20 +4,9 @@ using UnityEngine;
 
 public class DestroyBullet : MonoBehaviour
 {
-    public ParticleSystem hitParticles;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public ParticleSystem hitParticles; //impact particles
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision) // when the bullet hits something, destroy it and instantiate sparks particles in that spot
     {
         ParticleSystem particles = Instantiate(hitParticles, transform.position, transform.rotation);
         particles.Play();
